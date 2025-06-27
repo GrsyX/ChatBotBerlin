@@ -1,0 +1,606 @@
+/* Sidebar Grundlayout */
+.sidebar,
+.sidebar.closed {
+  background: #f5f5f5 !important;
+  transition: width 0.3s, display 0.3s;
+}
+.sidebar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  background: #f7f7fb;
+  border-right: 1px solid #e0e0e0;
+  min-height: 100vh;
+  transition: width 0.3s, background 0.3s;
+  min-width: 0;
+  max-width: 100vw;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.sidebar.closed {
+  width: 72px;
+}
+
+/* MOBILE: Sidebar im eingeklappten Zustand komplett ausblenden */
+@media (max-width: 700px) {
+  .sidebar.closed {
+    width: 0 !important;
+    min-width: 0 !important;
+    max-width: 0 !important;
+    display: none !important;
+    padding: 0 !important;
+    border: none !important;
+  }
+  .sidebar {
+    width: 250px;
+    min-width: 0;
+    max-width: 100vw;
+  }
+}
+
+/* Sidebar Header */
+.sidebar-header {
+  padding: 18px 0 18px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  border-bottom: 1px solid #e0e0e0;
+  min-height: 80px;
+  position: relative;
+}
+/* Sidebar Toggle Button */
+.sidebar-toggle {
+  border: none;
+  background: #fff;
+  color: #b60606;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-bottom: 4px;
+  font-size: 1.1rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  transition: background 0.2s, color 0.2s;
+}
+.sidebar-toggle:hover {
+  background: #ffeaea;
+  color: #b60606;
+}
+/* Neuer Chat Bereich */
+.sidebar-newchat {
+  padding: 24px 0 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+/* Neuer Chat Button */
+.new-chat-btn {
+  gap: 8px;
+  font-weight: 500;
+  color: #fff;
+  background: linear-gradient(90deg, #b60606 0%, #ff5a5a 100%);
+  display: flex;
+  cursor: pointer;
+  border: none;
+  font-size: 1rem;
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: 12px;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  max-width: 200px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  box-sizing: border-box;
+  transition: background 0.2s;
+}
+.new-chat-btn:hover {
+  background: #b60606;
+}
+/* Neuer Chat Button im eingeklappten Zustand */
+.sidebar-newchat-collapsed {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* zentriert vertikal */
+}
+.new-chat-btn-collapsed {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(90deg, #b60606 0%, #ff5a5a 100%);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-top: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  transition: background 0.2s;
+}
+.new-chat-btn-collapsed:hover {
+  background: #b60606;
+}
+/* Sidebar Inhalt */
+.sidebar-content {
+  flex: 1;
+  padding: 0 0.5rem;
+  overflow-y: auto;
+  margin-top: 18px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+/* Chatverlauf Titel */
+.sidebar-title {
+  padding: 0 0 10px 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #b60606;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+}
+/* Chatliste */
+.conversation-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.conversation-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-size: 1rem;
+  margin-bottom: 6px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  color: #222;
+  background: #f4f4f4;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.conversation-item.active,
+.conversation-item:hover {
+  background-color: #ffeaea;
+  color: #b60606;
+}
+.conversation-title {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+  max-width: none;
+}
+.conversation-icon-title {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  overflow: hidden;
+}
+.conversation-icon {
+  width: 24px;
+  height: 24px;
+  color: #fff;
+  flex-shrink: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(90deg, #b60606 0%, #ff5a5a 100%);
+}
+/* Einzelchat löschen */
+.delete-btn {
+  opacity: 1; /* Immer sichtbar */
+  background: none;
+  border: none;
+  color: #b60606;
+  transition: 0.2s;
+  box-sizing: border-box;
+  overflow: hidden;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 26px;
+  width: 26px;
+}
+
+/* Hover-Effekt */
+.delete-btn:hover {
+  color: #fff;
+  background-color: #b60606;
+}
+
+/* Footer: Alle löschen */
+.sidebar-footer {
+  padding: 18px 0 10px 0;
+  border-top: 1px solid #e0e0e0;
+  text-align: center;
+  margin-top: auto;
+  background: transparent;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.delete-all-btn {
+  background: #f44336;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 0 auto;
+  transition: background 0.2s;
+  width: 90%;
+  max-width: 200px;
+  box-sizing: border-box;
+  overflow: hidden;
+
+  
+}
+.delete-all-btn:hover {
+  background: #b60606;
+}
+/* Im eingeklappten Zustand alles andere ausblenden */
+.sidebar.closed .sidebar-content,
+.sidebar.closed .sidebar-footer {
+  display: none !important;
+}
+
+/**
+ * Einstellungen-Button und Panel in der Sidebar
+ */
+.settings-btn {
+  background: #f1f1f1;
+  color: #b60606;
+  border: none;
+  border-radius: 1.5rem;
+  padding: 0.7rem 1.2rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 170px;
+  margin-bottom: 0.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: none;
+}
+.settings-btn:hover,
+.settings-btn:focus {
+  background: #e5e5e5;
+}
+.settings-btn-label {
+  margin-left: 8px;
+}
+/**
+ * Einstellungen-Panel mittig
+ */
+.settings-panel {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 1rem;
+  padding: 1rem 1.2rem 1.5rem 1.2rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  text-align: center;
+  min-width: 200px;
+}
+.settings-title {
+  font-weight: bold;
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+}
+/**
+ * Zurücksetzen-Button mittig
+ */
+.reset-font-btn {
+  background: #f1f1f1;
+  color: #b60606;
+  border: none;
+  border-radius: 1rem;
+  padding: .4rem 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 2rem;
+  font-size: 1rem;
+  transition: background 0.2s;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.reset-font-btn:hover,
+.reset-font-btn:focus {
+  background: #ffeaea;
+}
+
+/* Trennlinie über dem Darkmode-Button */
+.darkmode-separator {
+  border-top: 1px solid #888;
+  opacity: 0.3;
+  margin: 2rem 0 1.2rem 0;
+}
+
+/* Darkmode-Button wie Zurücksetzen-Button gestalten */
+.darkmode-toggle-btn {
+  background: #f1f1f1;
+  color: #b60606;
+  border: none;
+  border-radius: 1rem;
+  padding: .4rem 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  margin-bottom: 0.5rem;
+}
+.darkmode-toggle-btn:hover,
+.darkmode-toggle-btn:focus {
+  background: #ffeaea;
+}
+
+.darkmode-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem; /* Abstand zwischen Icon und Text */
+}
+
+.darkmode-btn-icon {
+  display: flex;
+  align-items: center;
+  margin-right: 0.2rem;
+}
+
+.darkmode-btn-text {
+  display: flex;
+  align-items: center;
+}
+
+/* Darkmode-Variante */
+body.dark-mode .darkmode-toggle-btn {
+  background: #2c2f36;
+  color: #949494;
+}
+body.dark-mode .darkmode-toggle-btn:hover,
+body.dark-mode .darkmode-toggle-btn:focus {
+  background: #424447;
+  color: #fff;
+}
+
+/* Darkmode Styles */
+/* === Darkmode Styles für Sidebar und Chat ===
+ * 
+ * Wird durch die Klasse "dark-mode" auf <body> aktiviert.
+ * Alle Farben, Hintergründe und Schriften werden für dunkles Layout angepasst.
+ */
+body.dark-mode {
+  background: #18191a !important;
+  color: #574c4c !important;
+}
+
+body.dark-mode .sidebar,
+body.dark-mode .sidebar.closed {
+  background: #23272f !important;
+  border-right: 1px solid #222;
+}
+
+body.dark-mode .sidebar-header,
+body.dark-mode .sidebar-content,
+body.dark-mode .sidebar-footer,
+body.dark-mode .settings-panel {
+  background: #23272f !important;
+  color: #f1f1f1 !important;
+}
+
+body.dark-mode .conversation-item {
+  color: #777777;
+}
+
+body.dark-mode .conversation-item.active,
+body.dark-mode .conversation-item:hover {
+  background-color: #2c2f36;
+  color: #ff5a5a;
+}
+
+body.dark-mode .new-chat-btn,
+body.dark-mode .new-chat-btn-collapsed {
+  background: linear-gradient(90deg, #2c2f36 0%, #444 100%);
+  color: #fff;
+}
+
+body.dark-mode .settings-btn,
+body.dark-mode .reset-font-btn,
+body.dark-mode .darkmode-toggle-btn {
+  background: #2c2f36;
+  color: #949494;
+}
+
+body.dark-mode .settings-btn:hover,
+body.dark-mode .reset-font-btn:hover,
+body.dark-mode .darkmode-toggle-btn:hover {
+  background: #2c2f36;
+}
+
+body.dark-mode .delete-all-btn {
+  background: #800303;
+  color: #b3b3b3;
+}
+
+/* === Darkmode Styles für Menü-Button === */
+body.dark-mode .sidebar-toggle {
+  background: #2c2f36 !important;
+  color: #ff5a5a !important;
+  border: 1px solid #444 !important;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.18);
+}
+body.dark-mode .sidebar-toggle:hover {
+  background: #2c2f36 !important;
+  color: #ff5a5a !important;
+}
+
+/* === Darkmode Styles für einzelne Chats (Chatverlauf) === */
+body.dark-mode .conversation-item {
+  background: #2c2f36 !important;
+  color: #f1f1f1 !important;
+  border: 1px solid #222 !important;
+}
+body.dark-mode .conversation-item.active,
+body.dark-mode .conversation-item:hover {
+  background: #424447 !important;
+  color: #ff9191 !important;
+}
+
+/* Icon im Chatverlauf anpassen */
+body.dark-mode .conversation-icon {
+  background: linear-gradient(90deg, #222 0%, #444 100%) !important;
+  color: #fff !important;
+}
+
+/* === Darkmode Styles für Scrollbar === */
+body.dark-mode ::-webkit-scrollbar {
+  width: 8px;
+  background: #23272f;
+}
+body.dark-mode ::-webkit-scrollbar-thumb {
+  background: #444444;
+  border-radius: 6px;
+}
+body.dark-mode ::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Für Firefox */
+body.dark-mode {
+  scrollbar-color: #444 #23272f;
+  scrollbar-width: thin;
+}
+
+/* === Darkmode: Schriftgröße-Labels (Slider) === */
+body.dark-mode .MuiSlider-markLabel {
+  color: #f1f1f1 !important;
+}
+:root {
+  --dark-border: #444;
+}
+
+/* Slider Hauptfarbe rot */
+.MuiSlider-root {
+  color: #b60606 !important;
+}
+
+/* Thumb (Kreis) mit weißem Rand */
+.MuiSlider-thumb {
+  border: 2px solid #fff !important;
+}
+
+/* Rail (Hintergrundlinie) */
+.MuiSlider-rail {
+  color: #ffeaea !important;
+}
+
+/* === Darkmode für Chatbereich === */
+body.dark-mode .chat-content {
+  background: #18191a;
+  color: #f1f1f1;
+}
+
+body.dark-mode .chat-header {
+  background: #6b0000;
+  color: #b8b8b8;
+}
+
+body.dark-mode .chat-main-area {
+  background: #17181a;
+  color: #f1f1f1;
+}
+
+/* Chat-Bubbles */
+body.dark-mode .chat-message.bot {
+  background-color: #23272f;
+  color: #f1f1f1;
+}
+body.dark-mode .chat-message.user {
+  background-color: #434753;
+  color: #f1f1f1;
+}
+body.dark-mode .chat-input-area {
+  background: #23272f;
+  border-top: 1px solid #222;
+}
+body.dark-mode .chat-input-area input {
+  background: #18191a;
+  color: #f1f1f1;
+  border: 1.5px solid #444;
+}
+body.dark-mode .chat-input-area input::placeholder {
+  color: #888;
+}
+body.dark-mode .send-btn {
+  background: #5c0404;
+  color: #fff;
+  border: none;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.18);
+}
+body.dark-mode .send-btn:disabled {
+  background: #444;
+  color: #888;
+}
+body.dark-mode .language-btn {
+  background: #0d121a;
+  color: #f1f1f1;
+  border: 1px solid #181f2e;
+}
+body.dark-mode .language-btn:hover,
+body.dark-mode .language-btn:focus {
+  background: #b60606;
+  color: #fff;
+}
+/* Darkmode: Border */
+body.dark-mode .settings-panel {
+  border: 1px solid #333 !important;
+  background: #23272f !important;
+}
+body.dark-mode .chat-history,
+body.dark-mode .chat-list-section,
+body.dark-mode .chatverlauf-container {
+  border-bottom: 1px solid #444 !important;
+  border-top: 1px solid #444 !important;
+}
+body.dark-mode .sidebar-header {
+  border-bottom: 1px solid #444 !important;
+}
+body.dark-mode .sidebar-footer {
+  border-top: 1px solid #444 !important;
+}

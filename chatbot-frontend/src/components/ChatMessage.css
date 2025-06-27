@@ -1,0 +1,65 @@
+/**
+ * ChatMessage.css
+ * Styling für die ChatMessage-Komponente
+ * Definiert das Erscheinungsbild von Benutzer- und Bot-Nachrichten im Chat
+ */
+
+/* === Gemeinsames Grundlayout für alle Nachrichten === */
+.chat-message {
+  display: flex;                 /* Flex-Layout zur Ausrichtung von Inhalt */
+  max-width: 70%;               /* Nachrichtenbreite beschränkt auf 70% des Containers */
+  margin-bottom: 0.75rem;       /* Abstand zu nachfolgenden Nachrichten */
+  padding: 0.5rem 0.75rem;      /* Innenabstand für bessere Lesbarkeit */
+  border-radius: 8px;           /* Abgerundete Ecken für modernes Aussehen */
+  line-height: 1.4;             /* Etwas mehr Abstand zwischen den Textzeilen */
+  word-break: break-word;      /* <-- Lange Wörter umbrechen */
+  overflow-wrap: break-word;   /* <-- Lange Wörter umbrechen (Fallback) */
+  box-sizing: border-box;      /* <-- Padding wird mitgerechnet */
+}
+
+/* === Nachricht vom Bot (linksbündig) === */
+.chat-message.bot {
+  justify-content: flex-start;  /* Inhalt nach links ausrichten */
+  background-color: #d8d8d8;    /* Hellgrauer Hintergrund für Bot */
+  align-self: flex-start;       /* Positioniert sich am linken Rand im Chatverlauf */
+}
+
+/* === Nachricht vom Benutzer (rechtsbündig) === */
+.chat-message.user {
+  justify-content: flex-end;    /* Inhalt nach rechts ausrichten */
+  background-color: #ffbdbd;    /* Hellrot/rosa für Benutzerbeiträge */
+  align-self: flex-end;         /* Positioniert sich rechts im Chat */
+  margin-left: auto;            /* Drückt die Nachricht ganz nach rechts */
+}
+
+/* === Avatar für Bot-Nachrichten === */
+.chatbot-avatar {
+  width: 36px;
+  height: auto;
+  max-height: 36px;
+  margin-right: 0.5rem;
+  object-fit: contain;
+}
+
+/* === Nachrichtentext-Stil === */
+.chat-message .chat-text {
+  margin: 0;                    /* Kein äußerer Abstand – saubere Textplatzierung */
+  padding: 0;
+  word-break: break-word;      /* <-- Auch im Text-Container umbrechen */
+  overflow-wrap: break-word;
+  white-space: pre-line;       /* <-- Zeilenumbrüche und Whitespaces erhalten */
+}
+
+/* === Stil für Chat-Kategorie-Titel === */
+.chat-category-title {
+  font-weight: bold;            /* Fettdruck für bessere Lesbarkeit */
+  font-size: 1.15em;           /* Etwas größere Schriftgröße */
+  margin: 8px 0 4px 0;         /* Außenabstand für vertikale Positionierung */
+}
+
+/* === Stil für Chat-Links === */
+.chat-link {
+  color: #b60606;              /* Rotton für Links */
+  text-decoration: underline;   /* Unterstreichung für Links */
+  word-break: break-all;      /* <-- Wörter in Links umbrechen */
+}

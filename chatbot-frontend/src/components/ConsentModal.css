@@ -1,0 +1,50 @@
+/* Overlay, das das gesamte Fenster abdeckt und den Hintergrund abdunkelt */
+.consent-modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.4); /* halbtransparenter Hintergrund */
+  z-index: 9999; /* ganz oben anzeigen */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Das eigentliche Modal-Fenster */
+.consent-modal-content {
+  background: #fff;
+  border-radius: 16px;
+  padding: 32px;
+  max-width: 420px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.2); /* leichter Schatten */
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* Abstand zwischen den Elementen */
+}
+
+/* Checkbox und Text nebeneinander ausrichten */
+.consent-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 16px 0;
+  font-size: 1rem;
+}
+
+/* Stil für den Zustimmen-Button */
+.consent-modal-button {
+  background: #b60606;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+
+/* Button im deaktivierten Zustand */
+.consent-modal-button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
